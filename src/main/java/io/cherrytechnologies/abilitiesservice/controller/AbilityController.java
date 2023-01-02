@@ -1,7 +1,6 @@
 package io.cherrytechnologies.abilitiesservice.controller;
 
 import io.cherrytechnologies.abilitiesservice.dto.AbilityDto;
-import io.cherrytechnologies.abilitiesservice.dto.ResponseDto;
 import io.cherrytechnologies.abilitiesservice.service.AbilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,34 +22,34 @@ public class AbilityController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDto<AbilityDto>> getAbilityById(@PathVariable UUID id) {
+    public ResponseEntity<AbilityDto> getAbilityById(@PathVariable UUID id) {
         return ResponseEntity
-                .ok(new ResponseDto<>(service.getAbilityById(id)));
+                .ok(service.getAbilityById(id));
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<ResponseDto<AbilityDto>> getAbilityByName(@PathVariable String name) {
+    public ResponseEntity<AbilityDto> getAbilityByName(@PathVariable String name) {
         return ResponseEntity
-                .ok(new ResponseDto<>(service.getAbilityByName(name)));
+                .ok(service.getAbilityByName(name));
     }
 
     @PostMapping("/")
-    public ResponseEntity<ResponseDto<AbilityDto>> saveAbility(@RequestBody AbilityDto dto) {
+    public ResponseEntity<AbilityDto> saveAbility(@RequestBody AbilityDto dto) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ResponseDto<>(service.save(dto)));
+                .body(service.save(dto));
     }
 
     @PostMapping("/all")
-    public ResponseEntity<ResponseDto<List<AbilityDto>>> saveAllAbility(@RequestBody List<AbilityDto> dtos) {
+    public ResponseEntity<List<AbilityDto>> saveAllAbility(@RequestBody List<AbilityDto> dtos) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ResponseDto<>(service.saveAll(dtos)));
+                .body(service.saveAll(dtos));
     }
 
     @GetMapping("/pokemon/{id}")
-    public ResponseEntity<ResponseDto<List<AbilityDto>>> getAllByPokemonId(@PathVariable UUID id) {
+    public ResponseEntity<List<AbilityDto>> getAllByPokemonId(@PathVariable UUID id) {
         return ResponseEntity
-                .ok(new ResponseDto<>(service.getAllByPokemonId(id)));
+                .ok(service.getAllByPokemonId(id));
     }
 }
